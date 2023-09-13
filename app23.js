@@ -29,27 +29,28 @@ function* generate2() {
 console.log('script start');
 
 
-setTimeout(function () {
+nextTick(() => setTimeout(function () {
   console.log('setTimeout');
-}, 0)
+}, 0));
 
 
 const generator1 = generate();
-nextTick(() => generator1.next());
+generator1.next();
 generator1.next();
 
-async1()
+nextTick(async1)
 
 new Promise(function (resolve) {
   console.log('promise1');
   resolve();
 }).then(function () {
-  console.log('promise2');
+  console.log('here')
+  nextTick(() => console.log('promise2'));
 });
 
 console.log('script end')
 const generator2 = generate2();
-nextTick(() => generator2.next());
+generator2.next();
 generator2.next();
 
 /* 
@@ -61,33 +62,38 @@ generator2.next();
   // macr
   Итог:
     script start
-    // macr (console.log(setTimeout), 0)
-    // micr nt: generator1.next(), 
+    // micr nt: setTimeout(console.log(setTimeout), 0)
     generate-1
-    async1 start
-    async 2
-    // micr nt: generator1.next(), generator2.next(),
-    // micr:  console.log(async1 end), promise2
-    promise 1
-    script end
-    generate-2
     generate-1.2
-    generate-2.2
+    // micr nt: setTimeout(console.log(setTimeout), 0), async1(),
+    promise1
+    // micr: then(() => nextTick(console.log(promise2)))
+    script end
+    generator-2
+    generator-2.2
+    // start run micr nt:
+    // macr: (console.log(setTimeout), 0)
+    async1 start
+    async2
+    // micr: nextTick(console.log(promise2)), console.log(async1 end)
+    // start run micr:
+    // micr nt: console.log(promise2)
+    // start run micr nt:
+    promise 2
+    // start run micr:
     async1 end
-    promise2
-    // macr (console.log(setTimeout), 0)
     setTimeout
-  Результат:
-    + script start
-    + generate-1  
-    + async1 start
-    + async2      
-    + promise1    
-    + script end  
-    + generate-2  
-    + generate-1.2
-    + generate-2.2
-    + async1 end  
-    + promise2    
-    + setTimeout 
+  Результат: 
+    script start 
+    generate-1
+    generate-1.2
+    promise1    
+    script end  
+    generate-2  
+    generate-2.2
+    async1 start
+    async2      
+    async1 end  
+    promise2    
+    setTimeout  
 */
