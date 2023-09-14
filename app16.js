@@ -1,54 +1,55 @@
-const {nextTick} = require('node:process');
+const { nextTick } = require("node:process");
 
 function async1() {
-  console.log('async1 start');
+  console.log("async1 start");
   async2().then(() => {
-    console.log('async1 end');
+    console.log("async1 end");
   });
 }
 
 function async2() {
   return new Promise((resolve) => {
     resolve();
-    console.log('async2');
-  })
+    console.log("async2");
+  });
 }
 
 function* generate() {
-  console.log('generate-1')
+  console.log("generate-1");
   yield;
-  console.log('generate-1.2')
+  console.log("generate-1.2");
 }
 
 function* generate2() {
-  console.log('generate-2')
+  console.log("generate-2");
   yield;
-  console.log('generate-2.2')
+  console.log("generate-2.2");
 }
 
-console.log('script start');
+console.log("script start");
 
 nextTick(() => {
   setTimeout(function () {
-    console.log('setTimeout');
-    }, 0)
-  }
-);
+    console.log("setTimeout");
+  }, 0);
+});
 
 const generator1 = generate();
 nextTick(() => generator1.next());
 generator1.next();
 
-async1()
+async1();
 
-nextTick(() => new Promise(function (resolve) {
-  console.log('promise1');
-  resolve();
-}).then(function () {
-  console.log('promise2');
-}))
+nextTick(() =>
+  new Promise(function (resolve) {
+    console.log("promise1");
+    resolve();
+  }).then(function () {
+    console.log("promise2");
+  })
+);
 
-console.log('script end')
+console.log("script end");
 const generator2 = generate2();
 generator2.next();
 nextTick(() => generator2.next());

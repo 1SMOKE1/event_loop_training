@@ -1,7 +1,5 @@
 const { nextTick } = require("node:process");
 
-//FUNCTION IS MICRO TASK TOO;
-
 const fn1 = () => {
   setTimeout(() => {
     console.log("fn1 setTimeout");

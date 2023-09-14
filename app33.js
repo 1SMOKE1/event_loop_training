@@ -26,7 +26,7 @@ function* generate2() {
   yield;
   console.log("generate-2.2");
 }
-queueMicrotask(() => console.log('queueMicrotask'))
+
 
 console.log("script start");
 
@@ -47,8 +47,7 @@ nextTick(() => {
   setTimeout(function () {
     console.log("setTimeout 3");
   }, 100);
-
-  console.log('inside nextTick setTimeout')
+  nextTick(() => console.log('inside nextTick setTimeout'))
 })  
 
 
@@ -57,7 +56,7 @@ const generator1 = generate();
 generator1.next();
 nextTick(() => generator1.next());
 
-nextTick(async1);
+nextTick(() => async1());
 
 
 
@@ -69,22 +68,21 @@ new Promise(function (resolve) {
   console.log("promise2");
 });
 
-nextTick(() => {
-  new Promise(function (resolve) {
-    console.log("promise3");
-    resolve();
-  }).then(function () {
-    console.log("promise4");
-  });
-  console.log('inside nextTick for promise')
+queueMicrotask(() => console.log('queueMicrotask'))
+
+
+const promise = new Promise(function (resolve) {
+  console.log("promise3");
+  resolve();
 })
 
+nextTick(() => {
+  promise.then(function () {
+    console.log("promise4");
+  });
+})
 
 console.log('here')
-
-
-
-
 
 console.log("script end");
 const generator2 = generate2();
@@ -94,23 +92,29 @@ generator2.next();
 
 /*
   Итог:
-    script start
-    generate-1
-    promise1
-    here
-    script end
-    generate-2
-    generate-2.2
-    inside nextTick setTimeout
-    generate-1.2
-    async1 start
-    async2
-    promise3
-    inside nextTick for promise
+  s1  + script start 
+  s1  + generate-1 
+  s1  + promise1 
+  // micr: 
+  // then(() => console.log('promise2'));
+  // queueMicrotask(() => console.log('queueMicrotask'))
+  s1  + promise3
+  s1  + here 
+  s1  + script end
+  s1  + generate-2
+  s1  + generate-2.2
+  nt1 s  + inside nextTick setTimeout
+  nt1 s + generate-1.2
+  nt1 s + async1 start
+  nt1 s + async2
+  // micr:
+  // then(() => console.log('promise2'));
+  // queueMicrotask(() => console.log('queueMicrotask'))
+  // async1 end
+  // promise4
     queueMicrotask
-    promise2
-    async1 end
     promise 4
+    promise2
     immediate
     setTimeout 1
     setTimeout 2
@@ -119,22 +123,23 @@ generator2.next();
     script start
     generate-1
     promise1
+    promise3
     here
     script end
     generate-2
     generate-2.2
-    inside nextTick setTimeout 
+    inside nextTick setTimeout
     generate-1.2
     async1 start
     async2
-    promise3
-    inside nextTick for promise
-    queueMicrotask
     promise2
+    queueMicrotask
     async1 end
     promise4
     immediate
     setTimeout 1
     setTimeout 2
     setTimeout 3
+
+  // Должен был быть promise2 вместо async1 end, потому что он был добавлен на первой итерации
 */
