@@ -1,4 +1,4 @@
-import { arrayForTesting } from "./arrayForTesting.js";
+import { test } from "./arrayForTesting.js";
 
 /*
   Number.isSafeInteger()
@@ -24,9 +24,7 @@ import { arrayForTesting } from "./arrayForTesting.js";
 // console.log(Number.isSafeInteger(3.1)); // false
 // console.log(Number.isSafeInteger(3.0)); // true
 
-for(const item of arrayForTesting){
-  console.log(`typeof: ${typeof item}; value: ${item} => result: ${Number.isSafeInteger(item)}\n`);
-}
+test(Number.isSafeInteger)
 
 /*
   typeof: string; value: abs => result: false

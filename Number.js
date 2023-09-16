@@ -1,4 +1,4 @@
-import { arrayForTesting } from "./arrayForTesting.js";
+import { test } from "./arrayForTesting.js";
 
 /*
   new Number(value)
@@ -33,36 +33,34 @@ import { arrayForTesting } from "./arrayForTesting.js";
   в связи с потерей точности.
 */
 
-for(const item of arrayForTesting){
-  console.log(`typeof: ${typeof item}; value: ${item} => result: ${Number.isSafeInteger(item)}\n`);
-}
+test(Number, '// Number')
 
 /*
-  typeof: string; value: abs => result: false
+  typeof: string, value: abs, result: NaN // Number
 
-  typeof: string; value: 0123 => result: false    
-
-  typeof: string; value: 123 => result: false     
-
-  typeof: string; value: abs123 => result: false  
-
-  typeof: number; value: 123 => result: true      
-
-  typeof: number; value: 0.23 => result: false    
-
-  typeof: number; value: Infinity => result: false
-
-  typeof: number; value: NaN => result: false     
-
-  typeof: boolean; value: false => result: false
-
-  typeof: object; value: null => result: false
-
-  typeof: object; value: Sat Sep 16 2023 09:04:47 GMT+0300 (Москва, стандартное время) => result: false
-
-  typeof: object; value: [object Map] => result: false
-
-  typeof: object; value: [object Set] => result: false
-
-  typeof: object; value: [object Set] => result: false
+  typeof: string, value: 0123, result: 123 // Number
+  
+  typeof: string, value: 123, result: 123 // Number
+  
+  typeof: string, value: abs123, result: NaN // Number
+  
+  typeof: number, value: 123, result: 123 // Number
+  
+  typeof: number, value: 0.23, result: 0.23 // Number
+  
+  typeof: number, value: Infinity, result: Infinity // Number
+  
+  typeof: number, value: NaN, result: NaN // Number
+  
+  typeof: boolean, value: false, result: 0 // Number
+  
+  typeof: object, value: null, result: 0 // Number
+  
+  typeof: object, value: Sat Sep 16 2023 10:39:41 GMT+0300 (Москва, стандартное время), result: 1694849981088 // Number
+  
+  typeof: object, value: [object Map], result: NaN // Number
+  
+  typeof: object, value: [object Set], result: NaN // Number
+  
+  typeof: object, value: [object Set], result: NaN // Number
 */

@@ -1,4 +1,4 @@
-import { arrayForTesting } from "./arrayForTesting.js";
+import { test } from "./arrayForTesting.js";
 
 /*
   Метод Number.isInteger() определяет, является ли переданное значение целым числом.
@@ -30,36 +30,34 @@ import { arrayForTesting } from "./arrayForTesting.js";
 
 */
 
-for(const item of arrayForTesting){
-  console.log(`typeof: ${typeof item}; value:${item} => changedValue:${Number.isInteger(item)}\n`);
-}
+test(Number.isInteger)
 
 /*
-  typeof: string; value:abs => changedValue:false
-
-  typeof: string; value:0123 => changedValue:false
-
-  typeof: string; value:123 => changedValue:false
-
-  typeof: string; value:abs123 => changedValue:false
-
-  typeof: number; value:123 => changedValue:true
-
-  typeof: number; value:0.23 => changedValue:false
-
-  typeof: number; value:Infinity => changedValue:false
-
-  typeof: number; value:NaN => changedValue:false
-
-  typeof: boolean; value:false => changedValue:false
-
-  typeof: object; value:null => changedValue:false
-
-  typeof: object; value:Fri Sep 15 2023 21:59:12 GMT+0300 (Москва, стандартное время) => changedValue:false
-
-  typeof: object; value:[object Map] => changedValue:false
-
-  typeof: object; value:[object Set] => changedValue:false
-
-  typeof: object; value:[object Set] => changedValue:false
+  typeof: string, value: abs, result: false 
+  
+  typeof: string, value: 0123, result: false     
+  
+  typeof: string, value: 123, result: false      
+  
+  typeof: string, value: abs123, result: false   
+  
+  typeof: number, value: 123, result: true       
+  
+  typeof: number, value: 0.23, result: false     
+  
+  typeof: number, value: Infinity, result: false 
+  
+  typeof: number, value: NaN, result: false      
+  
+  typeof: boolean, value: false, result: false   
+  
+  typeof: object, value: null, result: false
+  
+  typeof: object, value: Sat Sep 16 2023 10:18:30 GMT+0300 (Москва, стандартное время), result: false
+  
+  typeof: object, value: [object Map], result: false
+  
+  typeof: object, value: [object Set], result: false
+  
+  typeof: object, value: [object Set], result: false
 */

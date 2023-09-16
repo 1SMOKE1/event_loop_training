@@ -15,6 +15,15 @@ export const arrayForTesting = [
   new Set([1,2,3,4,5,6]),
 ]
 
+export const test = (cb, addInf = '\n') => {
+
+  if(addInf.substring(addInf.length - 2) !== '\n'){
+    addInf += '\n';
+  }
+  for(const item of arrayForTesting){
+    console.log(`typeof: ${typeof item}, value: ${item}, result: ${cb.call(this, item)} ${addInf}`)
+  }
+}
 
 
 

@@ -1,4 +1,4 @@
-import { arrayForTesting } from "./arrayForTesting.js";
+import { test } from "./arrayForTesting.js";
 
 /*
   Поскольку оба оператора проверки на равенство, == (en-US) и === (en-US),
@@ -32,53 +32,66 @@ import { arrayForTesting } from "./arrayForTesting.js";
   Number.isNaN(" ");
 */
 
-for(const item of arrayForTesting){
-  // typeof item === 'number' && isNaN(item)
-  console.log(`typeof: ${typeof item}; value: ${item} => changedValue: ${Number.isNaN(item)} // isNaN called with Number Object`);
- // isNaN до проверки, ппытается приобразовать свой аргумент в число
-  console.log(`typeof: ${typeof item}; value: ${item} => changedValue: ${isNaN(item)} // just isNaN\n`)
-}
-
+console.log('// typeof item === \'number\' && isNaN(item)');
+test(Number.isNaN, '// isNaN called with Number Object');
+console.log('// isNaN до проверки, ппытается приобразовать свой аргумент в число')
+test(isNaN, '// just isNaN')
 /*
-  typeof: string; value: abs => changedValue: false // isNaN called with Number Object
-  typeof: string; value: abs => changedValue: true // just isNaN
+    // typeof item === 'number' && isNaN(item)
+    typeof: string, value: abs, result: false // isNaN called with Number Object     
 
-  typeof: string; value: 0123 => changedValue: false // isNaN called with Number Object
-  typeof: string; value: 0123 => changedValue: false // just isNaN
+    typeof: string, value: 0123, result: false // isNaN called with Number Object    
 
-  typeof: string; value: 123 => changedValue: false // isNaN called with Number Object
-  typeof: string; value: 123 => changedValue: false // just isNaN
+    typeof: string, value: 123, result: false // isNaN called with Number Object     
 
-  typeof: string; value: abs123 => changedValue: false // isNaN called with Number Object
-  typeof: string; value: abs123 => changedValue: true // just isNaN
+    typeof: string, value: abs123, result: false // isNaN called with Number Object  
 
-  typeof: number; value: 123 => changedValue: false // isNaN called with Number Object
-  typeof: number; value: 123 => changedValue: false // just isNaN
+    typeof: number, value: 123, result: false // isNaN called with Number Object     
 
-  typeof: number; value: 0.23 => changedValue: false // isNaN called with Number Object
-  typeof: number; value: 0.23 => changedValue: false // just isNaN
+    typeof: number, value: 0.23, result: false // isNaN called with Number Object    
 
-  typeof: number; value: Infinity => changedValue: false // isNaN called with Number Object
-  typeof: number; value: Infinity => changedValue: false // just isNaN
+    typeof: number, value: Infinity, result: false // isNaN called with Number Object
 
-  typeof: number; value: NaN => changedValue: true // isNaN called with Number Object
-  typeof: number; value: NaN => changedValue: true // just isNaN
+    typeof: number, value: NaN, result: true // isNaN called with Number Object      
 
-  typeof: boolean; value: false => changedValue: false // isNaN called with Number Object
-  typeof: boolean; value: false => changedValue: false // just isNaN
+    typeof: boolean, value: false, result: false // isNaN called with Number Object
 
-  typeof: object; value: null => changedValue: false // isNaN called with Number Object
-  typeof: object; value: null => changedValue: false // just isNaN
+    typeof: object, value: null, result: false // isNaN called with Number Object
 
-  typeof: object; value: Fri Sep 15 2023 22:10:47 GMT+0300 (Москва, стандартное время) => changedValue: false // isNaN called with Number Object
-  typeof: object; value: Fri Sep 15 2023 22:10:47 GMT+0300 (Москва, стандартное время) => changedValue: false // just isNaN
+    typeof: object, value: Sat Sep 16 2023 10:31:58 GMT+0300 (Москва, стандартное время), result: false // isNaN called with Number Object
 
-  typeof: object; value: [object Map] => changedValue: false // isNaN called with Number Object
-  typeof: object; value: [object Map] => changedValue: true // just isNaN
+    typeof: object, value: [object Map], result: false // isNaN called with Number Object
 
-  typeof: object; value: [object Set] => changedValue: false // isNaN called with Number Object
-  typeof: object; value: [object Set] => changedValue: true // just isNaN
+    typeof: object, value: [object Set], result: false // isNaN called with Number Object
 
-  typeof: object; value: [object Set] => changedValue: false // isNaN called with Number Object
-  typeof: object; value: [object Set] => changedValue: true // just isNaN
-*/
+    typeof: object, value: [object Set], result: false // isNaN called with Number Object
+
+    // isNaN до проверки, ппытается приобразовать свой аргумент в число
+    typeof: string, value: abs, result: true // just isNaN
+
+    typeof: string, value: 0123, result: false // just isNaN
+
+    typeof: string, value: 123, result: false // just isNaN
+
+    typeof: string, value: abs123, result: true // just isNaN
+
+    typeof: number, value: 123, result: false // just isNaN
+
+    typeof: number, value: 0.23, result: false // just isNaN
+
+    typeof: number, value: Infinity, result: false // just isNaN
+
+    typeof: number, value: NaN, result: true // just isNaN
+
+    typeof: boolean, value: false, result: false // just isNaN
+
+    typeof: object, value: null, result: false // just isNaN
+
+    typeof: object, value: Sat Sep 16 2023 10:31:58 GMT+0300 (Москва, стандартное время), result: false // just isNaN
+
+    typeof: object, value: [object Map], result: true // just isNaN
+
+    typeof: object, value: [object Set], result: true // just isNaN
+
+    typeof: object, value: [object Set], result: true // just isNaN
+*/  

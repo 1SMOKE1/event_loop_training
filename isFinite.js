@@ -1,4 +1,4 @@
-import { arrayForTesting } from "./arrayForTesting.js";
+import {test} from "./arrayForTesting.js";
 
 /*
   isFinite()
@@ -22,54 +22,69 @@ import { arrayForTesting } from "./arrayForTesting.js";
 // console.log(Number.isFinite('0')); // false
 // если бы isFinite был вызван, без объекта  Number, то было б true
 
-for(const item of arrayForTesting){
-  console.log(`/${typeof item}/ ${item} => ${isFinite(item)} // NOT from Number obj`);
-  console.log(`/${typeof item}/ ${item} => ${Number.isFinite(item)} // With Number obj !!!\n`);
-}
+
+test(isFinite, '// Without Number');
+console.log('====================')
+test(Number.isFinite, '// With Number')
 
 /*
  
-  /string/ abs => false // NOT from Number obj
-  /string/ abs => false // With Number obj !!!
+  typeof: string, value: abs, result: false // Without Number
 
-  /string/ 0123 => true // NOT from Number obj
-  /string/ 0123 => false // With Number obj !!!
+typeof: string, value: 0123, result: true // Without Number
 
-  /string/ 123 => true // NOT from Number obj
-  /string/ 123 => false // With Number obj !!!
+typeof: string, value: 123, result: true // Without Number
 
-  /string/ abs123 => false // NOT from Number obj
-  /string/ abs123 => false // With Number obj !!!
+typeof: string, value: abs123, result: false // Without Number
 
-  /number/ 123 => true // NOT from Number obj
-  /number/ 123 => true // With Number obj !!!
+typeof: number, value: 123, result: true // Without Number
 
-  /number/ 0.23 => true // NOT from Number obj
-  /number/ 0.23 => true // With Number obj !!!
+typeof: number, value: 0.23, result: true // Without Number
 
-  /number/ Infinity => false // NOT from Number obj
-  /number/ Infinity => false // With Number obj !!!
+typeof: number, value: Infinity, result: false // Without Number
 
-  /number/ NaN => false // NOT from Number obj
-  /number/ NaN => false // With Number obj !!!
+typeof: number, value: NaN, result: false // Without Number
 
-  /boolean/ false => true // NOT from Number obj
-  /boolean/ false => false // With Number obj !!!
+typeof: boolean, value: false, result: true // Without Number
 
-  /object/ null => true // NOT from Number obj
-  /object/ null => false // With Number obj !!!
+typeof: object, value: null, result: true // Without Number
 
-  /object/ Fri Sep 15 2023 21:45:34 GMT+0300 (Москва, стандартное время) => true // NOT from Number obj
-  /object/ Fri Sep 15 2023 21:45:34 GMT+0300 (Москва, стандартное время) => false // With Number obj !!!
+typeof: object, value: Sat Sep 16 2023 10:15:27 GMT+0300 (Москва, стандартное время), result: true // Without Number
 
-  /object/ [object Map] => false // NOT from Number obj
-  /object/ [object Map] => false // With Number obj !!!
+typeof: object, value: [object Map], result: false // Without Number
 
-  /object/ [object Set] => false // NOT from Number obj
-  /object/ [object Set] => false // With Number obj !!!
+typeof: object, value: [object Set], result: false // Without Number
 
-  /object/ [object Set] => false // NOT from Number obj
-  /object/ [object Set] => false // With Number obj !!!
+typeof: object, value: [object Set], result: false // Without Number
+
+====================
+typeof: string, value: abs, result: false // With Number
+
+typeof: string, value: 0123, result: false // With Number
+
+typeof: string, value: 123, result: false // With Number
+
+typeof: string, value: abs123, result: false // With Number
+
+typeof: number, value: 123, result: true // With Number
+
+typeof: number, value: 0.23, result: true // With Number
+
+typeof: number, value: Infinity, result: false // With Number
+
+typeof: number, value: NaN, result: false // With Number
+
+typeof: boolean, value: false, result: false // With Number
+
+typeof: object, value: null, result: false // With Number
+
+typeof: object, value: Sat Sep 16 2023 10:15:27 GMT+0300 (Москва, стандартное время), result: false // With Number
+
+typeof: object, value: [object Map], result: false // With Number
+
+typeof: object, value: [object Set], result: false // With Number
+
+typeof: object, value: [object Set], result: false // With Number
 
 
 */
