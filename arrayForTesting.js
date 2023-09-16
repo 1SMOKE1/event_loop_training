@@ -17,6 +17,7 @@ export const arrayForTesting = [
 
 export const test = (cb, addInf = '\n') => {
 
+  console.log(context)
   if(addInf.substring(addInf.length - 2) !== '\n'){
     addInf += '\n';
   }
