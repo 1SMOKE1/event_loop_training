@@ -17,3 +17,5 @@ console.log(num1 === num2); // false
 // что по итогу даст true, потому что будет совпадение и по типам и по значению.
 console.log(num1 === num3); // true
 
+
+
